@@ -1,0 +1,19 @@
+{
+  "files": [],
+  "include": ["src", "vite.config.ts"],
+  "references": [
+    { "path": "./config/tsconfig.app.json" },
+    { "path": "./config/tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "types": ["jest", "@testing-library/jest-dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+  }
+}
