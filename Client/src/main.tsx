@@ -8,8 +8,8 @@ if (rootElement) {
   const root = ReactDOM.createRoot(rootElement); 
   root.render(
     // Esta comentado unicamente para desarrollo para evitar el llamado doble de las API 
-    <React.StrictMode>
+    // <React.StrictMode>
       <App />
-    </React.StrictMode>
+    // </React.StrictMode>
   );
 }

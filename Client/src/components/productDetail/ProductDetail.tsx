@@ -21,7 +21,6 @@ const ProductImage = styled.img`
     max-height: 450px;
     border-radius: 8px;
     @media (max-width: 768px) {
-        width: 100%;
         height: 250px;
     }
 `;
@@ -43,7 +42,7 @@ const PriceTag = styled.p`
 `;
 
 const Description = styled.p`
-    width: 60%; 
+    width: 50%; 
     @media (max-width: 768px) {
         width: 100%;
     }
@@ -68,15 +67,23 @@ const Shipping = styled.div`
     align-content: center;
 `;
 
+const DetailsImg = styled.div`
+    width: 60%;
+    text-align-last: center;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+`;
+
 const DetailsMain = styled.div`
-    width: 30%;
+    width: 40%;
     @media (max-width: 768px) {
         width: 100%;
     }
 `;
 const DescriptionTitle = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.xlarge};
-    margin-top: 15%;
+    margin-top: 12%;
 `;
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
@@ -88,7 +95,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
     return (
         <DetailContainer>
             <InfoMain>
-                <ProductImage src={product.picture} alt={product.title} />
+                <DetailsImg>
+                    <ProductImage src={product.picture} alt={product.title} />
+                </DetailsImg>
                 <DetailsMain>
                     <Condition>
                         <Typography size={'small'}>{product.condition}</Typography> 

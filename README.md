@@ -45,9 +45,9 @@ Para el front: react, sass, styled-component, axios, jest para testing y Vite en
 - Se utiliza SASS solo para el archivo root ya que no son compatibles las técnologías por el momento, si bien no es solicitado consideré que sería un plus
 - Responsive
 - Manejo de errores
-- Actualización de metatag con el componente `Head` 
+- Actualización de metatag con el componente `Head` y la función `useHead`
 - Realizado con TS, así que se utiliza el manejo de interfaces
-- No vi la necesidad de añadir store ya que es un proyecto chico
+- No se añadió store ya que no fue solicitado, pero se podría para mejorar la escalabilidad con respecto a un flujo más extenso
 - El boton `Comprar` no realiza ninguna acción más simplemente mostrar un alert ya que no fue solicitado su funcionamiento
 - En los fonts se añadió `font-display: swap` para mientras realiza la carga de las fonts se añade la fuente del sistema mientras
-
+- Para este desarrollo se comento en el main.tsx `<React.StrictMode>` porque se realizan doble llamadas ya que ejecuta el useEffect 2 veces por comprobación de errores. Si bien esto no afecta en producción para fines de desarrollo lo deje comentado
