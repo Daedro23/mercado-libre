@@ -5,19 +5,20 @@ import CustomButton from '../button/Button';
 import { ProductDetailProps } from '../../services/interfaceProductDetails';
 import { formatCurrency } from '../../utils/FormatCurrency';
 import Typography from '../Typography/Typography';
+import { formatDescription } from '../../utils/formatDescription';
 
 const DetailContainer = styled.div`
     display: flex;
     flex-direction: column;
     border-radius: 8px;
     background: ${({ theme }) => theme.colors.white};
-    padding: 8px 16px;
+    padding: 24px 24px;
     margin-top: 24px;
 `;
 
 const ProductImage = styled.img`
-    width: 600px;
-    height: 450px;
+    max-width: 600px;
+    max-height: 450px;
     border-radius: 8px;
     @media (max-width: 768px) {
         width: 100%;
@@ -75,13 +76,13 @@ const DetailsMain = styled.div`
 `;
 const DescriptionTitle = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.xlarge};
-    margin-top: 8%;
+    margin-top: 15%;
 `;
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
 
     const handleClick = () => {
-        console.log('Comprado');
+        alert('Comprado')
       };
 
     return (
@@ -105,7 +106,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 </DetailsMain>
             </InfoMain>
             <DescriptionTitle>Descripción del producto</DescriptionTitle>           
-            {product.description ? <Description>{product.description}</Description>: 'Producto sin descripción' }
+            {product.description ? ( <Description dangerouslySetInnerHTML={{ __html: formatDescription(product.description) }} />) : 'Producto sin descripción'}
         </DetailContainer>
     );
 };

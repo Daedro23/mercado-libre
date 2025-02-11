@@ -8,16 +8,16 @@ import Loading from '../../components/loading/Loading';
 import { useEffect } from 'react';
 
 const Description: React.FC = () => {
-    const { setTitle } = useHead();
+    const { setHead } = useHead();
     useEffect(() => {
-        setTitle("Detalles del producto | Mercado Libre");
-      }, [setTitle]);
+        setHead("Detalles del producto | Mercado Libre");
+      }, [setHead]);
     const { id } = useParams();
     
     const { product, breadcrumbs, error } = useFetchProductDetails(id); 
 
     if (error) {
-        return <Error errorMessage={error}/>;
+        return <Error error={error} />;
     }
 
     return (

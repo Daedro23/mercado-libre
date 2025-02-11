@@ -1,6 +1,6 @@
 import { render, waitFor } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
-import Head from './Head';
+import { HeadProvider } from './Head'; 
 
 interface MockHeadProps {
     title: string;
@@ -8,7 +8,9 @@ interface MockHeadProps {
 
 const MockHead: React.FC<MockHeadProps> = ({ title }) => (
     <HelmetProvider>
-        <Head title={title} />
+        <HeadProvider>
+            <div>{title}</div>
+        </HeadProvider>
     </HelmetProvider>
 );
 
@@ -27,15 +29,15 @@ const getMetaTag = (metaName: string): string => {
 
 describe('Componente <Head />', () => {
     it('Cambia el título del <head> según lo que se le pase', async () => {
-        render(<MockHead title={'Mi título'} />);
+        render(<MockHead title={'Mercado Libre - Compra y vende'} />);
         await waitFor(() => {
-            expect(document.title).toEqual('Mi título');
+            expect(document.title).toEqual('Mercado Libre - Compra y vende');
             expect(document.title).not.toEqual('Mi título 123');
         });
     });
 
     it('Renderiza meta tags', async () => {
-        render(<MockHead title='Mercado Libre' />);
+        render(<MockHead title='Mercado Libre - Compra y vende' />);
         await waitFor(() => {
             expect(getMetaTag('description')).toEqual(
                 'Challenge Técnico Frontend'

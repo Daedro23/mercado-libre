@@ -3,16 +3,16 @@ import { Helmet } from "react-helmet-async";
 
 interface HeadContextProps {
   title: string;
-  setTitle: (title: string) => void;
+  setHead: (title: string) => void;
 }
 
 const HeadContext = createContext<HeadContextProps | undefined>(undefined);
 
 export const HeadProvider = ({ children }: { children: ReactNode }) => {
-  const [title, setTitle] = useState("Mercado Libre - Compra y vende");
+  const [title, setHead] = useState("Mercado Libre - Compra y vende");
 
   return (
-    <HeadContext.Provider value={{ title, setTitle }}>
+    <HeadContext.Provider value={{ title, setHead }}>
       <Helmet>
         <title>{title}</title>
         <link rel="icon" href="logo.png" type="image/x-icon" />
@@ -43,6 +43,7 @@ export const HeadProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useHead = () => {
   const context = useContext(HeadContext);
   if (!context) {

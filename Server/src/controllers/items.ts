@@ -4,9 +4,10 @@ import { ItemsResponse } from '../interface/itemsResponse';
 import { ProductDescription } from "../interface/product";
 import author from '../utils/author';
 import { getProductWithDescription } from '../utils/function';
+import axios from 'axios';
 
 export const getProducts = async (req: Request, res: Response) => {
-    const query = req.query.q as string; 
+    const query = req.query.q as string;
 
     try {
         const { data: products } = await axiosInstance.get<ItemsResponse>(`/sites/MLA/search?q=${query}&limit=4`);
@@ -17,8 +18,7 @@ export const getProducts = async (req: Request, res: Response) => {
             const { path_from_root } = filters[0].values[0];
             categories = path_from_root.map((category) => category.name);
         } else {
-            console.log('entro')
-            const category = products.results[0].category_id
+            const category = products.results[0].category_id;
             const { data: categoryData } = await axiosInstance.get(`/categories/${category}`);
             const { path_from_root } = categoryData;
             categories = path_from_root.map((category: { name: string[]; }) => category.name);
@@ -32,9 +32,17 @@ export const getProducts = async (req: Request, res: Response) => {
 
         res.json(result);
     } catch (error) {
-        res.status(500).json({ error: 'Error fetching products' });
+        if (axios.isAxiosError(error) && error.response) {
+            res.status(error.response.status || 500).json({
+                message: error.response.statusText || 'Error al obtener productos.',
+                status: error.response.status
+            });
+        } else {
+            res.status(500).json({ message: 'Error inesperado al procesar la solicitud.' });
+        }
     }
 };
+
 
 export const getProductInfo = async (req: Request, res: Response) => {
     const { id } = req.params;
@@ -49,15 +57,28 @@ export const getProductInfo = async (req: Request, res: Response) => {
         try {
             const { data } = await axiosInstance.get(`/items/${id}/description`);
             productDescription = data;
-        } catch (err) {
-            console.log(err)
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                res.status(error.response.status || 500).json({
+                    message: error.response.statusText || 'Error al obtener productos.',
+                    status: error.response.status
+                });
+            } else {
+                res.status(500).json({ message: 'Error inesperado al procesar la solicitud.' });
+            }
         }
         const item = getProductWithDescription(product, productDescription.plain_text || '');
         const formattedObject = { author, item, categories };
 
         res.json(formattedObject);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error fetching product info' });
+        if (axios.isAxiosError(error) && error.response) {
+            res.status(error.response.status || 500).json({
+                message: error.response.statusText || 'Error al obtener productos.',
+                status: error.response.status
+            });
+        } else {
+            res.status(500).json({ message: 'Error inesperado al procesar la solicitud.' });
+        }
     }
 };

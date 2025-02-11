@@ -5,7 +5,7 @@ import { Item, ApiResponse } from './interfaceProductDetails';
 export const useFetchProductDetails = (id: string | undefined) => {
     const [product, setProduct] = useState<Item | null>(null);
     const [breadcrumbs, setBreadcrumbs] = useState<string[]>([]);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<{ message: string; code?: string; status?: number } | null>(null);
 
     useEffect(() => {
         if (id) {
@@ -16,11 +16,12 @@ export const useFetchProductDetails = (id: string | undefined) => {
                     setBreadcrumbs(data.categories);
                 })
                 .catch((err) => {
-                    console.error(err);
-                    setError('Error al encontrar los detalles del producto');
+                    setError({
+                        message: err.message || 'Error desconocido',
+                        status: err.response?.status || 500,
+                    });
                 });
-        }
-    }, [id]);
+        }}, [id]);
 
     return { product, breadcrumbs, error };
 };

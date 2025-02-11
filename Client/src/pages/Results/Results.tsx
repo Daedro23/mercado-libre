@@ -9,16 +9,16 @@ import { useEffect } from 'react';
 const Results: React.FC = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('search');
-  const { setTitle } = useHead();
+  const { setHead } = useHead();
   const { products, breadcrumbs, error } = useFetchProducts(query);
   
   useEffect(() => {
-    setTitle(`Resultados de ${query || "tu búsqueda"} | Mercado Libre`);
-  }, [query, setTitle]);
+    setHead(`Resultados de ${query || "tu búsqueda"} | Mercado Libre`);
+  }, [query, setHead]);
 
   if (error) {
-    return <Error errorMessage={error} />; 
-  }
+    return <Error error={error} />;
+}
 
   return (
     <>

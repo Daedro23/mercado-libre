@@ -7,6 +7,7 @@ const rootElement = document.getElementById('root');
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement); 
   root.render(
+    // Esta comentado unicamente para desarrollo para evitar el llamado doble de las API 
     <React.StrictMode>
       <App />
     </React.StrictMode>

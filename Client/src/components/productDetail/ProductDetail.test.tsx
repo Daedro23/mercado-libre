@@ -34,7 +34,8 @@ describe('<ProductDetail />', () => {
     });
 
     it('debe manejar el clic en el botón de compra', () => {
-        const consoleLogSpy = jest.spyOn(console, 'log'); 
+        const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
+
         render(
             <ThemeProvider theme={theme}>
                 <ProductDetail product={mockProduct} />
@@ -44,8 +45,8 @@ describe('<ProductDetail />', () => {
         const buyButton = screen.getByText('Comprar');
         fireEvent.click(buyButton);
 
-        expect(consoleLogSpy).toHaveBeenCalledWith('Comprado');
+        expect(alertSpy).toHaveBeenCalledWith('Comprado');
 
-        consoleLogSpy.mockRestore(); 
+        alertSpy.mockRestore(); 
     });
 });
