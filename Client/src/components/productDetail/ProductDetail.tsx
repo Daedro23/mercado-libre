@@ -17,12 +17,23 @@ const DetailContainer = styled.div`
 `;
 
 const ProductImage = styled.img`
-    max-width: 600px;
-    max-height: 450px;
-    border-radius: 8px;
-    @media (max-width: 768px) {
-        height: 250px;
-    }
+  width: 100%; 
+  max-width: 100%;
+  max-height: 80vh; 
+  height: auto;
+  object-fit: contain; 
+  border-radius: 8px;
+  transition: transform 0.3s ease; 
+  
+  transform: scale(1);
+
+  @media (max-width: 768px) {
+    max-height: 250px;
+  }
+
+  @media (max-width: 1024px) {
+    max-height: 30vh; 
+  }
 `;
 
 const Title = styled.h2`
@@ -68,11 +79,8 @@ const Shipping = styled.div`
 `;
 
 const DetailsImg = styled.div`
-    width: 60%;
-    text-align-last: center;
-    @media (max-width: 768px) {
-        width: 100%;
-    }
+  text-align: center; 
+  margin: 0 auto; 
 `;
 
 const DetailsMain = styled.div`
