@@ -15,7 +15,7 @@
 Primero, clonarlo con:
 
 ```bash
-git clone https://github.com/Daedro23/meli-front/tree/master
+git clone https://github.com/Daedro23/mercado-libre.git
 ```
 
 Una vez clonado, abrir el directorio raiz y ejecutar `cd Server` para entrar al directorio del back. ejecutar `npm install` y una vez que termine, `npm run dev` para iniciar el servidor.
